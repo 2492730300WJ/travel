@@ -68,4 +68,26 @@ public class UserController {
         }
         return workResponse;
     }
+
+    @RequestMapping("/get")
+    public WorkResponse getM(){
+        log.info("接受到访问获取用户信息的请求");
+        WorkStatus workStatus = null;
+        WorkResponse workResponse;
+        JSONObject json = null;
+        try {
+//            json = userService.login(user);
+            log.info("访问获取用户信息请求成功，生成token："+json.get("token")+"，refreshToken："+json.get("refreshToken"));
+        }catch (WorkException work){
+            workStatus = work.getWorkStatus();
+            log.info("访问获取用户信息请求失败，失败原因：" + work.getExceptionMsg());
+        }catch (Exception e) {
+            workStatus = WorkStatus.FAIL;
+            e.printStackTrace();
+            log.info("访问获取用户信息请求失败，失败原因：系统出现异常");
+        } finally {
+            workResponse = new WorkResponse(workStatus,json);
+        }
+        return workResponse;
+    }
 }
