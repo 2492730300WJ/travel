@@ -61,17 +61,17 @@ public class CodeGenerator {
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
 //        dsc.setUrl("jdbc:mysql://localhost:3306/lwdb?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC");
-        dsc.setUrl("jdbc:mysql://122.51.69.85:3306/dot?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC");
+        dsc.setUrl("jdbc:mysql://47.102.121.70:3306/travel?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("123456wc");
+        dsc.setPassword("123456db");
         mpg.setDataSource(dsc);
 
         // 包配置
         PackageConfig pc = new PackageConfig();
         pc.setModuleName(scanner("模块名"));
-        pc.setParent("dotdot.api.mybatisplus");
+        pc.setParent("travel.api.mybatisplus");
         pc.setMapper("mapper");//mapper
         pc.setService("service");//servcie
         pc.setController("controller");//controller
