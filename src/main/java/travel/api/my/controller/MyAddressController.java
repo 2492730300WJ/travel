@@ -27,9 +27,10 @@ public class MyAddressController {
     @Autowired
     private MyAddressService myAddressService;
 
+
     @PostMapping("/get")
     @UserLoginToken
-    private WorkResponse getAddress(@RequestBody User user) {
+    public WorkResponse getAddress(@RequestBody User user) {
         log.info("接收到访问我的地址请求");
         WorkStatus workStatus = null;
         WorkResponse workResponse;
