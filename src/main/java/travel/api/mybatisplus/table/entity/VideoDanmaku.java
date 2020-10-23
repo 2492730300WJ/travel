@@ -27,9 +27,11 @@ package travel.api.mybatisplus.table.entity;
 
     private Integer videoId;
 
-    private String chat;
+    private String text;
 
     private Integer time;
+
+    private String color;
 
 
 }

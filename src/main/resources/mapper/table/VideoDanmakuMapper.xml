@@ -6,13 +6,14 @@
     <resultMap id="BaseResultMap" type="travel.api.mybatisplus.table.entity.VideoDanmaku">
         <id column="id" property="id" />
         <result column="video_id" property="videoId" />
-        <result column="chat" property="chat" />
+        <result column="text" property="text" />
         <result column="time" property="time" />
+        <result column="color" property="color" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, video_id, chat, time
+        id, video_id, text, time, color
     </sql>
 
 </mapper>
