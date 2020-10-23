@@ -2,7 +2,6 @@ package travel.api.mybatisplus.table.entity;
 
     import com.baomidou.mybatisplus.annotation.IdType;
     import com.baomidou.mybatisplus.annotation.TableId;
-    import java.time.LocalDateTime;
     import java.io.Serializable;
     import lombok.Data;
     import lombok.EqualsAndHashCode;
@@ -14,7 +13,7 @@ package travel.api.mybatisplus.table.entity;
     * </p>
 *
 * @author wj
-* @since 2020-10-23
+* @since 2020-10-24
 */
     @Data
         @EqualsAndHashCode(callSuper = false)
@@ -25,6 +24,8 @@ package travel.api.mybatisplus.table.entity;
 
             @TableId(value = "video_id", type = IdType.AUTO)
     private Integer videoId;
+
+    private String author;
 
     private String cover;
 

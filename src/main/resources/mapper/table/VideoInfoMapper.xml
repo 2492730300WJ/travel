@@ -5,6 +5,7 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="travel.api.mybatisplus.table.entity.VideoInfo">
         <id column="video_id" property="videoId" />
+        <result column="author" property="author" />
         <result column="cover" property="cover" />
         <result column="url" property="url" />
         <result column="description" property="description" />
@@ -14,7 +15,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        video_id, cover, url, description, time, status
+        video_id, author, cover, url, description, time, status
     </sql>
 
 </mapper>
