@@ -13,7 +13,7 @@ package travel.api.mybatisplus.table.entity;
     * </p>
 *
 * @author wj
-* @since 2020-10-24
+* @since 2020-10-27
 */
     @Data
         @EqualsAndHashCode(callSuper = false)
@@ -34,6 +34,12 @@ package travel.api.mybatisplus.table.entity;
     private String description;
 
     private String time;
+
+    private Integer loveNum;
+
+    private Integer commNum;
+
+    private Integer redoNum;
 
     private Integer status;
 

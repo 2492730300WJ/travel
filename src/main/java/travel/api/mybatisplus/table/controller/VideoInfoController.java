@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author wj
- * @since 2020-10-24
+ * @since 2020-10-27
  */
 @RestController
 @RequestMapping("/table/video-info")
