@@ -1,7 +1,6 @@
-package travel.api.error;
+package travel.api.config.response;
 
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @Author: dd
@@ -9,11 +8,12 @@ import lombok.Setter;
 @Getter
 public enum WorkStatus {
     SUCCESS(200, "请求成功"),
-    FAIL(1,"系统出现异常"),
-    PASSWORD_IS_ERROR(2,"用户名或密码错误"),
-    THIS_ROLE_DO_NOT_LOGIN(3,"该角色无法登录此系统"),
-    LOGIN_TIME_OUT(4,"登录已过期，请重新登录"),
-    PLEASE_LOGIN(5,"请先登录您的账号")
+    FAIL(201,"系统出现异常"),
+    PASSWORD_IS_ERROR(201,"用户名或密码错误"),
+    THIS_ROLE_DO_NOT_LOGIN(203,"该角色无法登录此系统"),
+    LOGIN_TIME_OUT(204,"登录已过期，请重新登录"),
+    PLEASE_LOGIN(205,"请先登录您的账号"),
+    CHECK_PARAM(206,"请检查传入参数")
     ;
 
     /**

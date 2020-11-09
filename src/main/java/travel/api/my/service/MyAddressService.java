@@ -1,6 +1,9 @@
 package travel.api.my.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import org.apache.commons.lang.StringUtils;
+import travel.api.config.response.WorkException;
+import travel.api.config.response.WorkStatus;
 import travel.api.mybatisplus.table.entity.UserAddress;
 import travel.api.mybatisplus.table.mapper.UserAddressMapper;
 import travel.api.user.entity.User;
@@ -23,6 +26,9 @@ public class MyAddressService {
      * @return
      */
     public JSONObject getAddress(User user) {
+        if (StringUtils.isBlank(user.getUserId())){
+            throw new WorkException(WorkStatus.CHECK_PARAM);
+        }
         JSONObject result = new JSONObject();
         LambdaQueryWrapper<UserAddress> queryWrapper = new LambdaQueryWrapper();
         queryWrapper.eq(UserAddress::getUserId,user.getUserId());

@@ -1,10 +1,11 @@
-package travel.api.error;
+package travel.api.config.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import net.sf.json.JSONObject;
+import org.slf4j.MDC;
 
 /**
  * @Author: dd
@@ -16,31 +17,36 @@ public class WorkResponse {
     /**
      * 异常Code
      */
-    private Integer exceptionCode;
+    private Integer code;
 
     /**
      * 异常信息
      */
-    private String exceptionMsg;
+    private String msg;
 
     /**
      * JSONObject
      */
-    private JSONObject result;
+    private JSONObject data;
+
+    /**
+     * 操作ID
+     */
+    private String operatingId = MDC.get("operatingId");
     /**
      * enum
      */
     @JsonIgnore
     private WorkStatus workStatus;
 
-    public WorkResponse(WorkStatus workStatus,JSONObject result){
-        this.result = result;
+    public WorkResponse(WorkStatus workStatus,JSONObject data){
+        this.data = data;
         this.workStatus = workStatus;
         if(workStatus ==null){
             workStatus = WorkStatus.SUCCESS;
         }
-        this.exceptionCode = workStatus.getWorkCode();
-        this.exceptionMsg = workStatus.getWorkMsg();
+        this.code = workStatus.getWorkCode();
+        this.msg = workStatus.getWorkMsg();
     }
 
     public WorkResponse(WorkStatus workStatus){
@@ -48,8 +54,7 @@ public class WorkResponse {
         if(workStatus ==null){
             workStatus = WorkStatus.SUCCESS;
         }
-        this.exceptionCode = workStatus.getWorkCode();
-        this.exceptionMsg = workStatus.getWorkMsg();
+        this.code = workStatus.getWorkCode();
+        this.msg = workStatus.getWorkMsg();
     }
-
 }

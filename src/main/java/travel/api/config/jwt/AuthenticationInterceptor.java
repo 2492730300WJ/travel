@@ -1,7 +1,7 @@
 package travel.api.config.jwt;
 
-import travel.api.error.WorkException;
-import travel.api.error.WorkStatus;
+import travel.api.config.response.WorkException;
+import travel.api.config.response.WorkStatus;
 import travel.api.user.service.UserService;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;

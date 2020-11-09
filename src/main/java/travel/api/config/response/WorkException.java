@@ -1,4 +1,4 @@
-package travel.api.error;
+package travel.api.config.response;
 
 import lombok.Getter;
 
