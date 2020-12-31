@@ -10,7 +10,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
  */
 @SpringBootApplication
 @ServletComponentScan(basePackages = {"travel.api.config"})
-@MapperScan(basePackages = {"travel.api.mybatisplus.table.mapper"})
+@MapperScan(basePackages = {"travel.api.table.mapper"})
 public class ApiApplication {
 
     public static void main(String[] args) {

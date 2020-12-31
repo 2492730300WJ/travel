@@ -3,7 +3,7 @@ package travel.api.video.controller;
 import travel.api.config.response.CommonReturnController;
 import travel.api.config.response.WorkResponse;
 import travel.api.config.response.WorkStatus;
-import travel.api.mybatisplus.table.entity.VideoInfo;
+import travel.api.table.entity.VideoInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

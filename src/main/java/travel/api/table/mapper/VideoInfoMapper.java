@@ -1,6 +1,6 @@
-package travel.api.mybatisplus.table.mapper;
+package travel.api.table.mapper;
 
-import travel.api.mybatisplus.table.entity.VideoInfo;
+import travel.api.table.entity.VideoInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

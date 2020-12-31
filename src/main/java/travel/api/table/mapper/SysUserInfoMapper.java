@@ -1,6 +1,6 @@
-package travel.api.mybatisplus.table.mapper;
+package travel.api.table.mapper;
 
-import travel.api.mybatisplus.table.entity.SysUserInfo;
+import travel.api.table.entity.SysUserInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

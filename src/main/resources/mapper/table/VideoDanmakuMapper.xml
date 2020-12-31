@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="travel.api.mybatisplus.table.mapper.VideoDanmakuMapper">
+<mapper namespace="travel.api.table.mapper.VideoDanmakuMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="travel.api.mybatisplus.table.entity.VideoDanmaku">
+    <resultMap id="BaseResultMap" type="travel.api.table.entity.VideoDanmaku">
         <id column="id" property="id" />
-        <result column="video_id" property="videoId" />
+        <result column="media_id" property="mediaId" />
         <result column="text" property="text" />
         <result column="time" property="time" />
         <result column="color" property="color" />
@@ -13,7 +13,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, video_id, text, time, color
+        id, media_id, text, time, color
     </sql>
 
 </mapper>

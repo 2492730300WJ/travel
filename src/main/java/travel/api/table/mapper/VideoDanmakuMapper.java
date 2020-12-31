@@ -1,6 +1,6 @@
-package travel.api.mybatisplus.table.mapper;
+package travel.api.table.mapper;
 
-import travel.api.mybatisplus.table.entity.VideoDanmaku;
+import travel.api.table.entity.VideoDanmaku;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

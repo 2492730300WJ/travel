@@ -5,11 +5,10 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import travel.api.mybatisplus.table.entity.UserAddress;
-import travel.api.mybatisplus.table.entity.VideoDanmaku;
-import travel.api.mybatisplus.table.entity.VideoInfo;
-import travel.api.mybatisplus.table.mapper.VideoDanmakuMapper;
-import travel.api.mybatisplus.table.mapper.VideoInfoMapper;
+import travel.api.table.entity.VideoDanmaku;
+import travel.api.table.entity.VideoInfo;
+import travel.api.table.mapper.VideoDanmakuMapper;
+import travel.api.table.mapper.VideoInfoMapper;
 
 import java.util.List;
 
@@ -52,7 +51,7 @@ public class VideoService {
         VideoInfo video = videoInfoMapper.selectOne(queryWrapper);
         // 获取弹幕信息
         LambdaQueryWrapper<VideoDanmaku> danmakuQueryWrapper = new LambdaQueryWrapper();
-        danmakuQueryWrapper.eq(VideoDanmaku::getVideoId, videoInfo.getVideoId());
+        danmakuQueryWrapper.eq(VideoDanmaku::getMediaId, videoInfo.getVideoId());
         List<VideoDanmaku> danmakuList = videoDanmakuMapper.selectList(danmakuQueryWrapper);
         result.put("video",video);
         result.put("danmakuList",danmakuList);
