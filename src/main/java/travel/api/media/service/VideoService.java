@@ -1,4 +1,4 @@
-package travel.api.video.service;
+package travel.api.media.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -6,9 +6,9 @@ import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import travel.api.table.entity.VideoDanmaku;
-import travel.api.table.entity.VideoInfo;
+import travel.api.table.entity.MediaInfo;
 import travel.api.table.mapper.VideoDanmakuMapper;
-import travel.api.table.mapper.VideoInfoMapper;
+import travel.api.table.mapper.MediaInfoMapper;
 
 import java.util.List;
 
@@ -18,16 +18,16 @@ import java.util.List;
 @Service
 public class VideoService {
     @Autowired
-    private VideoInfoMapper videoInfoMapper;
+    private MediaInfoMapper mediaInfoMapper;
 
     @Autowired
     private VideoDanmakuMapper videoDanmakuMapper;
 
     public JSONObject getVideoList() {
         JSONObject result = new JSONObject();
-        LambdaQueryWrapper<VideoInfo> queryWrapper = new LambdaQueryWrapper();
-        queryWrapper.eq(VideoInfo::getStatus, 0);
-        List<VideoInfo> list = videoInfoMapper.selectList(queryWrapper);
+        LambdaQueryWrapper<MediaInfo> queryWrapper = new LambdaQueryWrapper();
+        queryWrapper.eq(MediaInfo::getStatus, 0);
+        List<MediaInfo> list = mediaInfoMapper.selectList(queryWrapper);
         JSONArray jsonArray = new JSONArray();
         com.alibaba.fastjson.JSONObject jsonObject;
         for (int i = 0; i < list.size(); i++) {
@@ -43,15 +43,15 @@ public class VideoService {
         return result;
     }
 
-    public JSONObject getVideoDetail(VideoInfo videoInfo) {
+    public JSONObject getVideoDetail(MediaInfo mediaInfo) {
         JSONObject result = new JSONObject();
         // 获取视频信息
-        LambdaQueryWrapper<VideoInfo> queryWrapper = new LambdaQueryWrapper();
-        queryWrapper.eq(VideoInfo::getVideoId, videoInfo.getVideoId());
-        VideoInfo video = videoInfoMapper.selectOne(queryWrapper);
+        LambdaQueryWrapper<MediaInfo> queryWrapper = new LambdaQueryWrapper();
+        queryWrapper.eq(MediaInfo::getMediaId, mediaInfo.getMediaId());
+        MediaInfo video = mediaInfoMapper.selectOne(queryWrapper);
         // 获取弹幕信息
         LambdaQueryWrapper<VideoDanmaku> danmakuQueryWrapper = new LambdaQueryWrapper();
-        danmakuQueryWrapper.eq(VideoDanmaku::getMediaId, videoInfo.getVideoId());
+        danmakuQueryWrapper.eq(VideoDanmaku::getMediaId, mediaInfo.getMediaId());
         List<VideoDanmaku> danmakuList = videoDanmakuMapper.selectList(danmakuQueryWrapper);
         result.put("video",video);
         result.put("danmakuList",danmakuList);

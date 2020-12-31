@@ -16,12 +16,12 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class VideoInfo implements Serializable {
+public class MediaInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "video_id", type = IdType.AUTO)
-    private Integer videoId;
+    @TableId(value = "media_id", type = IdType.AUTO)
+    private Integer mediaId;
 
     private Long userId;
 
@@ -30,8 +30,6 @@ public class VideoInfo implements Serializable {
     private String url;
 
     private String description;
-
-    private String time;
 
     private Integer loveNum;
 
