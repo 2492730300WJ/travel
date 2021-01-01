@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping("api/video")
 public class VideoController extends CommonReturnController {
+
+    @Autowired
     private VideoService videoService;
 
     /**

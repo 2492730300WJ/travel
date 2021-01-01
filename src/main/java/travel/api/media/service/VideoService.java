@@ -1,6 +1,5 @@
 package travel.api.media.service;
 
-import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
