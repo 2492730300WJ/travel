@@ -28,18 +28,7 @@ public class VideoService {
         LambdaQueryWrapper<MediaInfo> queryWrapper = new LambdaQueryWrapper();
         queryWrapper.eq(MediaInfo::getStatus, 0);
         List<MediaInfo> list = mediaInfoMapper.selectList(queryWrapper);
-        JSONArray jsonArray = new JSONArray();
-        com.alibaba.fastjson.JSONObject jsonObject;
-        for (int i = 0; i < list.size(); i++) {
-            jsonObject = (com.alibaba.fastjson.JSONObject) com.alibaba.fastjson.JSONObject.toJSON(list.get(i));
-            if( i == 0){
-                jsonObject.put("flag",true);
-            }else {
-                jsonObject.put("flag",false);
-            }
-            jsonArray.add(jsonObject);
-        }
-        result.put("videoList",jsonArray);
+        result.put("videoList",list);
         return result;
     }
 

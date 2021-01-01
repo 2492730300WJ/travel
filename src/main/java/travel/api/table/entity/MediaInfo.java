@@ -25,6 +25,8 @@ public class MediaInfo implements Serializable {
 
     private Long userId;
 
+    private String title;
+
     private String cover;
 
     private String url;
