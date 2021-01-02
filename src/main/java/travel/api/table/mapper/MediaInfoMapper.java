@@ -8,5 +8,4 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2020-10-27
  */
 public interface MediaInfoMapper extends BaseMapper<MediaInfo> {
-
 }

@@ -31,9 +31,7 @@ public class VideoService {
         queryWrapper.eq(MediaInfo::getStatus, 0);
         queryWrapper.eq(MediaInfo::getType, requestDTO.getType());
         queryWrapper.orderByDesc(MediaInfo::getCreateTime);
-        IPage<MediaInfo> page = new Page<>();
-        page.setPages(requestDTO.getPageNo());
-        page.setSize(requestDTO.getPageSize());
+        Page<MediaInfo> page = new Page<>(requestDTO.getPageNo(),requestDTO.getPageSize());
         IPage<MediaInfo> page1 = mediaInfoMapper.selectPage(page,queryWrapper);
         result.put("videoList",page1.getRecords());
         return result;
