@@ -8,6 +8,7 @@
         <result column="user_id" property="userId"/>
         <result column="title" property="title"/>
         <result column="cover" property="cover"/>
+        <result column="type" property="type"/>
         <result column="url" property="url"/>
         <result column="description" property="description"/>
         <result column="love_num" property="loveNum"/>
@@ -20,7 +21,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        media_id, user_id, title, cover, url, description, love_num, comm_num, redo_num, status,create_time,update_time
+        media_id, user_id, title,type, cover, url, description, love_num, comm_num, redo_num, status,create_time,update_time
     </sql>
 
 </mapper>

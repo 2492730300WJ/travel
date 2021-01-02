@@ -3,6 +3,7 @@ package travel.api.media.controller;
 import travel.api.config.response.CommonReturnController;
 import travel.api.config.response.WorkResponse;
 import travel.api.config.response.WorkStatus;
+import travel.api.media.dto.MediaRequestDTO;
 import travel.api.table.entity.MediaInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,8 +30,8 @@ public class VideoController extends CommonReturnController {
      * @param response
      */
     @PostMapping("/list")
-    public void getVideoList(HttpServletResponse response) {
-        this.commonResponse(response, new WorkResponse(WorkStatus.SUCCESS, videoService.getVideoList()));
+    public void getVideoList(HttpServletResponse response, @RequestBody MediaRequestDTO requestDTO) {
+        this.commonResponse(response, new WorkResponse(WorkStatus.SUCCESS, videoService.getVideoList(requestDTO)));
     }
 
     /**

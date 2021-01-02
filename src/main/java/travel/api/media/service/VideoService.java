@@ -1,9 +1,12 @@
 package travel.api.media.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import travel.api.media.dto.MediaRequestDTO;
 import travel.api.table.entity.VideoDanmaku;
 import travel.api.table.entity.MediaInfo;
 import travel.api.table.mapper.VideoDanmakuMapper;
@@ -22,12 +25,17 @@ public class VideoService {
     @Autowired
     private VideoDanmakuMapper videoDanmakuMapper;
 
-    public JSONObject getVideoList() {
+    public JSONObject getVideoList(MediaRequestDTO requestDTO) {
         JSONObject result = new JSONObject();
         LambdaQueryWrapper<MediaInfo> queryWrapper = new LambdaQueryWrapper();
         queryWrapper.eq(MediaInfo::getStatus, 0);
-        List<MediaInfo> list = mediaInfoMapper.selectList(queryWrapper);
-        result.put("videoList",list);
+        queryWrapper.eq(MediaInfo::getType, requestDTO.getType());
+        queryWrapper.orderByDesc(MediaInfo::getCreateTime);
+        IPage<MediaInfo> page = new Page<>();
+        page.setPages(requestDTO.getPageNo());
+        page.setSize(requestDTO.getPageSize());
+        IPage<MediaInfo> page1 = mediaInfoMapper.selectPage(page,queryWrapper);
+        result.put("videoList",page1.getRecords());
         return result;
     }
 
