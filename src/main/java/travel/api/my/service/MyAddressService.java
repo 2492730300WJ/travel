@@ -26,7 +26,7 @@ public class MyAddressService {
      * @return
      */
     public JSONObject getAddress(User user) {
-        if (StringUtils.isBlank(user.getUserId())){
+        if (null == user.getUserId()){
             throw new WorkException(WorkStatus.CHECK_PARAM);
         }
         JSONObject result = new JSONObject();
