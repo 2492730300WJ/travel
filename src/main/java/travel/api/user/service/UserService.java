@@ -64,4 +64,15 @@ public class UserService {
         jsonObject.put("user", sessionInfo);
         return jsonObject;
     }
+
+    public JSONObject info(User user) {
+        if (null == user.getUserId()) {
+            throw new WorkException(WorkStatus.CHECK_PARAM);
+        }
+        SysUserInfo userInfo = sysUserInfoMapper.selectOne(new QueryWrapper<SysUserInfo>().eq("user_id", user.getUserId()));
+        JSONObject jsonObject = new JSONObject();
+        user.setPassword(null);
+        jsonObject.put("user",userInfo);
+        return jsonObject;
+    }
 }

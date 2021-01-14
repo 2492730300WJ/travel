@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-    String userId;
+    Long userId;
     String userCard;
     String password;
     String token;
