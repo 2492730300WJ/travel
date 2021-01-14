@@ -16,4 +16,5 @@ public class User {
     String password;
     String token;
     String refreshToken;
+    Long phone;
 }

@@ -28,6 +28,29 @@ public class SysUserInfo implements Serializable {
     private String userCard;
 
     /**
+     * 用户手机
+     */
+    private Long phone;
+
+    /**
+     * 关注
+     */
+    private Long follow;
+    /**
+     * 粉丝
+     */
+    private Long fans;
+    /**
+     * 热度
+     */
+    private Long hot;
+
+    /**
+     * 头像
+     */
+    private String avatar;
+
+    /**
      * 用户密码
      */
     private String userPassword;

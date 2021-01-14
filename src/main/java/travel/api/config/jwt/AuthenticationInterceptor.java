@@ -54,7 +54,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                     try {
                         Claims c = tokenService.parseRefreshJWT(refreshToken);
                         System.out.println(c.getSubject());
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         throw new WorkException(WorkStatus.LOGIN_TIME_OUT);
                     }
                 }
@@ -62,7 +62,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 try {
                     Claims c = tokenService.parseJWT(token);
                     System.out.println(c.getSubject());
-                }catch(Exception e){
+                } catch (Exception e) {
                     throw new WorkException(WorkStatus.LOGIN_TIME_OUT);
                 }
                 return true;

@@ -7,6 +7,11 @@
         <id column="user_id" property="userId" />
         <result column="user_card" property="userCard" />
         <result column="user_password" property="userPassword" />
+        <result column="phone" property="phone" />
+        <result column="hot" property="hot" />
+        <result column="avatar" property="avatar" />
+        <result column="follow" property="follow" />
+        <result column="fans" property="fans" />
         <result column="user_name" property="userName" />
         <result column="status" property="status" />
         <result column="create_time" property="createTime" />
@@ -15,7 +20,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        user_id, user_card, user_password, user_name, status,create_time,update_time
+        user_id, user_card, fans, follow, hot, avatar, phone, user_password, user_name, status,create_time,update_time
     </sql>
 
 </mapper>

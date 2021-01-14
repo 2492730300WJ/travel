@@ -1,6 +1,7 @@
 package travel.api.user.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.apache.commons.lang.StringUtils;
 import travel.api.config.jwt.TokenService;
 import travel.api.config.session.SessionInfo;
 import travel.api.config.response.WorkException;
@@ -31,9 +32,19 @@ public class UserService {
 
     public JSONObject login(User user) {
         JSONObject jsonObject = new JSONObject();
-        SysUserInfo userInfo = sysUserInfoMapper.selectOne(new QueryWrapper<SysUserInfo>().eq("user_card", user.getUserCard()).eq("user_password", user.getPassword()));
-        if (userInfo == null) {
-            throw new WorkException(WorkStatus.PASSWORD_IS_ERROR);
+        SysUserInfo userInfo = null;
+        // 手机号登录
+        if (null != user.getPhone()) {
+            userInfo = sysUserInfoMapper.selectOne(new QueryWrapper<SysUserInfo>().eq("phone", user.getPhone()));
+            if (userInfo == null) {
+                throw new WorkException(WorkStatus.PASSWORD_IS_ERROR);
+            }
+        }
+        if (StringUtils.isNotBlank(user.getUserCard())) {
+            userInfo = sysUserInfoMapper.selectOne(new QueryWrapper<SysUserInfo>().eq("user_card", user.getUserCard()).eq("user_password", user.getPassword()));
+            if (userInfo == null) {
+                throw new WorkException(WorkStatus.PASSWORD_IS_ERROR);
+            }
         }
 
         // 存入session
