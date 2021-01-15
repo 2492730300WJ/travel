@@ -52,6 +52,7 @@ public class UserService {
         sessionInfo.setUserId(userInfo.getUserId());
         sessionInfo.setUserName(userInfo.getUserName());
         sessionInfo.setUserCard(userInfo.getUserCard());
+        sessionInfo.setAvatar(userInfo.getAvatar());
 
         // 登陆时获取长Token和短Token
         String token = tokenService.getToken(sessionInfo);

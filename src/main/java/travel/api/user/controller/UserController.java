@@ -30,7 +30,7 @@ public class UserController extends CommonReturnController {
     }
 
     /**
-     * 登录
+     * 用户信息
      */
     @PostMapping("/info")
     @UserLoginToken

@@ -34,6 +34,11 @@ public class SessionInfo implements Serializable {
      */
     private Long userId;
 
+    /**
+     * 头像
+     */
+    private String avatar;
+
 
 
     /**
