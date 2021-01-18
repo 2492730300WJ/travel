@@ -48,6 +48,11 @@ public class User implements Serializable {
     private String userName;
 
     /**
+     * 描述
+     */
+    private String description;
+
+    /**
      * 状态（0.正常1.封禁2.注销）
      */
     private Integer status;
