@@ -1,6 +1,6 @@
 package travel.api.user.service;
 
-import travel.api.user.entity.User;
+import travel.api.dto.request.user.UserRequestDTO;
 import net.sf.json.JSONObject;
 
 /**
@@ -8,7 +8,7 @@ import net.sf.json.JSONObject;
  */
 public interface UserService {
 
-    public JSONObject login(User user);
+    public JSONObject login(UserRequestDTO userRequestDTO);
 
-    public JSONObject info(User user);
+    public JSONObject info(UserRequestDTO userRequestDTO);
 }

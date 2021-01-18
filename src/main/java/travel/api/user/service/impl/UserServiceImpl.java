@@ -6,6 +6,8 @@ import travel.api.config.jwt.TokenService;
 import travel.api.config.session.SessionInfo;
 import travel.api.config.response.WorkException;
 import travel.api.config.response.WorkStatus;
+import travel.api.dto.request.user.UserRequestDTO;
+import travel.api.dto.response.user.UserInfoResponseDTO;
 import travel.api.table.entity.User;
 import travel.api.table.mapper.UserMapper;
 import travel.api.user.service.UserService;
@@ -31,18 +33,18 @@ public class UserServiceImpl implements UserService {
     TokenService tokenService;
 
     @Override
-    public JSONObject login(travel.api.user.entity.User user) {
+    public JSONObject login(UserRequestDTO userRequestDTO) {
         JSONObject jsonObject = new JSONObject();
         User userInfo = null;
         // 手机号登录
-        if (null != user.getPhone()) {
-            userInfo = userMapper.selectOne(new QueryWrapper<User>().eq("phone", user.getPhone()));
+        if (null != userRequestDTO.getPhone()) {
+            userInfo = userMapper.selectOne(new QueryWrapper<User>().eq("phone", userRequestDTO.getPhone()));
             if (userInfo == null) {
                 throw new WorkException(WorkStatus.PASSWORD_IS_ERROR);
             }
         }
-        if (StringUtils.isNotBlank(user.getUserCard())) {
-            userInfo = userMapper.selectOne(new QueryWrapper<User>().eq("user_card", user.getUserCard()).eq("user_password", user.getPassword()));
+        if (StringUtils.isNotBlank(userRequestDTO.getUserCard())) {
+            userInfo = userMapper.selectOne(new QueryWrapper<User>().eq("user_card", userRequestDTO.getUserCard()).eq("user_password", userRequestDTO.getPassword()));
             if (userInfo == null) {
                 throw new WorkException(WorkStatus.PASSWORD_IS_ERROR);
             }
@@ -68,14 +70,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public JSONObject info(travel.api.user.entity.User user) {
-        if (null == user.getUserId()) {
+    public JSONObject info(UserRequestDTO userRequestDTO) {
+        if (null == userRequestDTO.getUserId()) {
             throw new WorkException(WorkStatus.CHECK_PARAM);
         }
-        User userInfo = userMapper.selectOne(new QueryWrapper<User>().eq("user_id", user.getUserId()));
+        UserInfoResponseDTO userInfo = userMapper.userInfo(userRequestDTO.getUserId());
         JSONObject jsonObject = new JSONObject();
-        user.setPassword(null);
-        jsonObject.put("user",userInfo);
+        // 计算成长值百分比
+        int progress = Math.round(userInfo.getGrow() / userInfo.getLevel());
+        userInfo.setProgressWidth(progress + "%");
+        jsonObject.put("user", userInfo);
         return jsonObject;
     }
 }

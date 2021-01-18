@@ -33,19 +33,6 @@ public class User implements Serializable {
     private Long phone;
 
     /**
-     * 关注
-     */
-    private Long follow;
-    /**
-     * 粉丝
-     */
-    private Long fans;
-    /**
-     * 热度
-     */
-    private Long hot;
-
-    /**
      * 头像
      */
     private String avatar;

@@ -8,10 +8,7 @@
         <result column="user_card" property="userCard" />
         <result column="user_password" property="userPassword" />
         <result column="phone" property="phone" />
-        <result column="hot" property="hot" />
         <result column="avatar" property="avatar" />
-        <result column="follow" property="follow" />
-        <result column="fans" property="fans" />
         <result column="user_name" property="userName" />
         <result column="status" property="status" />
         <result column="create_time" property="createTime" />
@@ -20,7 +17,25 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        user_id, user_card, fans, follow, hot, avatar, phone, user_password, user_name, status,create_time,update_time
+        user_id, user_card, avatar, phone, user_password, user_name, status,create_time,update_time
     </sql>
+
+    <select id="userInfo" parameterType="java.lang.Long" resultType="travel.api.dto.response.user.UserInfoResponseDTO">
+        SELECT
+	        hot,
+	        fans,
+	        follow,
+	        avatar,
+	        user_name userName,
+	        level,
+	        grow
+        FROM
+	        USER u
+	    LEFT JOIN user_level ul ON u.user_id = ul.user_id
+	    LEFT JOIN user_data_stat uds ON uds.user_id = u.user_id
+        WHERE
+        	u.user_id = #{userId}
+	        AND status = 0
+    </select>
 
 </mapper>
