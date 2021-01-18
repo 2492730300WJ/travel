@@ -45,4 +45,9 @@ public class UserInfoResponseDTO {
      */
     private String description;
 
+    /**
+     * 描述
+     */
+    private Long phone;
+
 }
