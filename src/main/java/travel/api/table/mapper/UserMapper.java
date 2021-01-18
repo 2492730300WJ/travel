@@ -1,6 +1,6 @@
 package travel.api.table.mapper;
 
-import travel.api.table.entity.SysUserInfo;
+import travel.api.table.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author wj
  * @since 2020-07-27
  */
-public interface SysUserInfoMapper extends BaseMapper<SysUserInfo> {
+public interface UserMapper extends BaseMapper<User> {
 
 }

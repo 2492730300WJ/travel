@@ -6,9 +6,8 @@ import travel.api.config.jwt.TokenService;
 import travel.api.config.session.SessionInfo;
 import travel.api.config.response.WorkException;
 import travel.api.config.response.WorkStatus;
-import travel.api.table.entity.SysUserInfo;
-import travel.api.table.mapper.SysUserInfoMapper;
-import travel.api.user.entity.User;
+import travel.api.table.entity.User;
+import travel.api.table.mapper.UserMapper;
 import travel.api.user.service.UserService;
 import travel.api.util.RedisUtil;
 import net.sf.json.JSONObject;
@@ -23,7 +22,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private SysUserInfoMapper sysUserInfoMapper;
+    private UserMapper userMapper;
 
     @Autowired
     private RedisUtil redisUtil;
@@ -32,18 +31,18 @@ public class UserServiceImpl implements UserService {
     TokenService tokenService;
 
     @Override
-    public JSONObject login(User user) {
+    public JSONObject login(travel.api.user.entity.User user) {
         JSONObject jsonObject = new JSONObject();
-        SysUserInfo userInfo = null;
+        User userInfo = null;
         // 手机号登录
         if (null != user.getPhone()) {
-            userInfo = sysUserInfoMapper.selectOne(new QueryWrapper<SysUserInfo>().eq("phone", user.getPhone()));
+            userInfo = userMapper.selectOne(new QueryWrapper<User>().eq("phone", user.getPhone()));
             if (userInfo == null) {
                 throw new WorkException(WorkStatus.PASSWORD_IS_ERROR);
             }
         }
         if (StringUtils.isNotBlank(user.getUserCard())) {
-            userInfo = sysUserInfoMapper.selectOne(new QueryWrapper<SysUserInfo>().eq("user_card", user.getUserCard()).eq("user_password", user.getPassword()));
+            userInfo = userMapper.selectOne(new QueryWrapper<User>().eq("user_card", user.getUserCard()).eq("user_password", user.getPassword()));
             if (userInfo == null) {
                 throw new WorkException(WorkStatus.PASSWORD_IS_ERROR);
             }
@@ -69,11 +68,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public JSONObject info(User user) {
+    public JSONObject info(travel.api.user.entity.User user) {
         if (null == user.getUserId()) {
             throw new WorkException(WorkStatus.CHECK_PARAM);
         }
-        SysUserInfo userInfo = sysUserInfoMapper.selectOne(new QueryWrapper<SysUserInfo>().eq("user_id", user.getUserId()));
+        User userInfo = userMapper.selectOne(new QueryWrapper<User>().eq("user_id", user.getUserId()));
         JSONObject jsonObject = new JSONObject();
         user.setPassword(null);
         jsonObject.put("user",userInfo);
