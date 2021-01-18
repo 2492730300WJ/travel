@@ -33,7 +33,7 @@ public class UserController extends CommonReturnController {
      * 用户信息
      */
     @PostMapping("/info")
-//    @UserLoginToken
+    @UserLoginToken
     public void info(HttpServletResponse response, @RequestBody UserRequestDTO userRequestDTO) {
         this.commonResponse(response, new WorkResponse(WorkStatus.SUCCESS, userService.info(userRequestDTO)));
     }
