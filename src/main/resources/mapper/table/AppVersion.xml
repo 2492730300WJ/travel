@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="travel.api.table.mapper.AppVersionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="travel.api.table.entity.AppVersion">
+        <id column="app_version_id" property="appVersionId" />
+		<result column="app_version" property="appVersion" />
+		<result column="wgt_url" property="wgtUrl" />
+		<result column="pkg_url" property="pkgUrl" />
+    </resultMap>
+
+    <select id="checkVersion" parameterType="java.lang.String" resultType="travel.api.dto.response.app.AppUpdateResponseDTO">
+        SELECT
+	        wgt_url wgtUrl,
+	        pkg_url pkgUrl
+        FROM
+	        app_version
+	        where version > #{version}
+	    ORDER BY app_version_id DESC
+    </select>
+
+</mapper>
