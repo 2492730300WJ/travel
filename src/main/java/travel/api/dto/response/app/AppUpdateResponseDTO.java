@@ -12,4 +12,8 @@ public class AppUpdateResponseDTO {
     private String wgtUrl;
 
     private String pkgUrl;
+
+    private String versionName;
+
+    private String tips;
 }

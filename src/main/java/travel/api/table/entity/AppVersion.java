@@ -26,4 +26,8 @@ public class AppVersion implements Serializable {
 
     private String pkgUrl;
 
+    private String versionName;
+
+    private String tips;
+
 }
