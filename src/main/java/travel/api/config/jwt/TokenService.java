@@ -43,7 +43,7 @@ public class TokenService {
                 //设置签名使用的签名算法和签名使用的秘钥
                 .signWith(signatureAlgorithm, key);
         //30分钟有效期
-        long expMillis = nowMillis + 3000000L;
+        long expMillis = nowMillis + 30000000L;
         Date exp = new Date(expMillis);
         //设置过期时间
         builder.setExpiration(exp);
