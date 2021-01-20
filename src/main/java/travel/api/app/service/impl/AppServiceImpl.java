@@ -28,10 +28,14 @@ public class AppServiceImpl implements AppService {
         if (null != list && list.size() == 1) {
             responseDTO.setStatus("1");
             responseDTO.setWgtUrl(list.get(0).getWgtUrl());
+            responseDTO.setVersionName(list.get(0).getVersionName());
+            responseDTO.setTips(list.get(0).getTips());
         }
         if (null != list && list.size() > 1) {
             responseDTO.setStatus("2");
             responseDTO.setPkgUrl(list.get(0).getPkgUrl());
+            responseDTO.setVersionName(list.get(0).getVersionName());
+            responseDTO.setTips(list.get(0).getTips());
         }
         JSONObject result = new JSONObject();
         result.put("versionStatus",responseDTO);
