@@ -87,18 +87,17 @@ public class WebSocket {
         log.info("[WebSocket] 收到消息：{}", message);
         // 私聊
         if (1 == dto.getMsgType()) {
-                JSONObject fromMsg = JSONObject.parseObject(message);
-                JSONObject toMsg = JSONObject.parseObject(message);
-                toMsg.put("isMy","N");
-                UserInfoResponseDTO to = webSocket.userMapper.userInfo(dto.getTo());
-                toMsg.put("avatar",to.getAvatar());
-                toMsg.put("time", TimeUtil.getNormalTime());
-                AppointSending(dto.getTo().toString(), toMsg.toJSONString());
-                fromMsg.put("isMy","Y");
-                UserInfoResponseDTO from = webSocket.userMapper.userInfo(dto.getFrom());
-                fromMsg.put("avatar",from.getAvatar());
-                fromMsg.put("time", TimeUtil.getNormalTime());
-                AppointSending(dto.getFrom().toString(), fromMsg.toJSONString());
+            JSONObject fromMsg = JSONObject.parseObject(message);
+            JSONObject toMsg = JSONObject.parseObject(message);
+            UserInfoResponseDTO from = webSocket.userMapper.userInfo(dto.getFrom());
+            toMsg.put("isMy", "N");
+            toMsg.put("avatar", from.getAvatar());
+            toMsg.put("time", TimeUtil.getNormalTime());
+            AppointSending(dto.getTo().toString(), toMsg.toJSONString());
+            fromMsg.put("isMy", "Y");
+            fromMsg.put("avatar", from.getAvatar());
+            fromMsg.put("time", TimeUtil.getNormalTime());
+            AppointSending(dto.getFrom().toString(), fromMsg.toJSONString());
 
 //            PrivateMsg privateMsg = new PrivateMsg();
 //            privateMsg.setFromUser(dto.getFrom());
@@ -111,7 +110,7 @@ public class WebSocket {
 //            privateMsgMapper.insert(privateMsg);
         }
         // 群聊
-        if (2 == dto.getMsgType()){
+        if (2 == dto.getMsgType()) {
             log.info("[WebSocket] 群聊开发中");
         }
 
@@ -143,7 +142,7 @@ public class WebSocket {
             webSocketSet.get(name).session.getBasicRemote().sendText(message);
             log.info("[WebSocket] 发送私聊成功");
         } catch (Exception e) {
-            log.info("[WebSocket] 不在线 " );
+            log.info("[WebSocket] 不在线 ");
             e.printStackTrace();
         }
     }
