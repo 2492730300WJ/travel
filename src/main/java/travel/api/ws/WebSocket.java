@@ -12,6 +12,8 @@ import travel.api.util.Constant;
 import travel.api.util.TimeUtil;
 import travel.api.ws.dto.CommonMsgRequestDTO;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
@@ -34,11 +36,18 @@ import java.util.concurrent.ConcurrentHashMap;
 @ServerEndpoint("/websocket/{name}")
 public class WebSocket {
 
-    @Autowired
-    PrivateMsgMapper privateMsgMapper;
 
-    @Autowired
+    @Resource
     UserMapper userMapper;
+
+    private static WebSocket webSocket;
+
+    @PostConstruct
+    public void init() {
+        webSocket = this;
+        // 初使化时将已静态化的configParam实例化
+        webSocket.userMapper = this.userMapper;
+    }
 
     /**
      * 与某个客户端的连接对话，需要通过它来给客户端发送消息
@@ -80,12 +89,12 @@ public class WebSocket {
         if (1 == dto.getMsgType()) {
                 JSONObject msg = JSONObject.parseObject(message);
                 msg.put("isMy","N");
-                UserInfoResponseDTO to = userMapper.userInfo(dto.getTo());
+                UserInfoResponseDTO to = webSocket.userMapper.userInfo(dto.getTo());
                 msg.put("avatar",to.getAvatar());
                 msg.put("time", TimeUtil.getNormalTime());
                 AppointSending(dto.getTo().toString(), msg.toJSONString());
                 msg.put("isMy","Y");
-                UserInfoResponseDTO from = userMapper.userInfo(dto.getFrom());
+                UserInfoResponseDTO from = webSocket.userMapper.userInfo(dto.getFrom());
                 msg.put("avatar",from.getAvatar());
                 AppointSending(dto.getFrom().toString(), msg.toJSONString());
 
@@ -132,6 +141,7 @@ public class WebSocket {
             webSocketSet.get(name).session.getBasicRemote().sendText(message);
             log.info("[WebSocket] 发送私聊成功");
         } catch (Exception e) {
+            log.info("[WebSocket] 不在线 " );
             e.printStackTrace();
         }
     }
