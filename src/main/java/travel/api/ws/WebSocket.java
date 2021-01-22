@@ -87,16 +87,18 @@ public class WebSocket {
         log.info("[WebSocket] 收到消息：{}", message);
         // 私聊
         if (1 == dto.getMsgType()) {
-                JSONObject msg = JSONObject.parseObject(message);
-                msg.put("isMy","N");
+                JSONObject fromMsg = JSONObject.parseObject(message);
+                JSONObject toMsg = JSONObject.parseObject(message);
+                toMsg.put("isMy","N");
                 UserInfoResponseDTO to = webSocket.userMapper.userInfo(dto.getTo());
-                msg.put("avatar",to.getAvatar());
-                msg.put("time", TimeUtil.getNormalTime());
-                AppointSending(dto.getTo().toString(), msg.toJSONString());
-                msg.put("isMy","Y");
+                toMsg.put("avatar",to.getAvatar());
+                toMsg.put("time", TimeUtil.getNormalTime());
+                AppointSending(dto.getTo().toString(), toMsg.toJSONString());
+                fromMsg.put("isMy","Y");
                 UserInfoResponseDTO from = webSocket.userMapper.userInfo(dto.getFrom());
-                msg.put("avatar",from.getAvatar());
-                AppointSending(dto.getFrom().toString(), msg.toJSONString());
+                fromMsg.put("avatar",from.getAvatar());
+                fromMsg.put("time", TimeUtil.getNormalTime());
+                AppointSending(dto.getFrom().toString(), fromMsg.toJSONString());
 
 //            PrivateMsg privateMsg = new PrivateMsg();
 //            privateMsg.setFromUser(dto.getFrom());
