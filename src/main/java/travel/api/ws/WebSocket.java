@@ -23,8 +23,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
  
 @Slf4j
-//@Component
-//@ServerEndpoint("/websocket/{name}")
+@Component
+@ServerEndpoint("/websocket/{name}")
 public class WebSocket {
  
     /**
