@@ -78,7 +78,6 @@ public class WebSocket {
         log.info("[WebSocket] 收到消息：{}", message);
         // 私聊
         if (1 == dto.getMsgType()) {
-            try {
                 JSONObject msg = JSONObject.parseObject(message);
                 msg.put("isMy","N");
                 UserInfoResponseDTO to = userMapper.userInfo(dto.getTo());
@@ -89,9 +88,7 @@ public class WebSocket {
                 UserInfoResponseDTO from = userMapper.userInfo(dto.getFrom());
                 msg.put("avatar",from.getAvatar());
                 AppointSending(dto.getFrom().toString(), msg.toJSONString());
-            } catch (Exception e) {
-                log.info("[WebSocket] 发送私聊失败");
-            }
+
 //            PrivateMsg privateMsg = new PrivateMsg();
 //            privateMsg.setFromUser(dto.getFrom());
 //            privateMsg.setToUser(dto.getTo());
