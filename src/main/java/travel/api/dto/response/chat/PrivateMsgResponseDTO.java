@@ -1,4 +1,4 @@
-package travel.api.ws.dto;
+package travel.api.dto.response.chat;
 
 import lombok.Data;
 
@@ -6,7 +6,7 @@ import lombok.Data;
  * @Author: dd
  */
 @Data
-public class CommonMsgRequestDTO {
+public class PrivateMsgResponseDTO {
     private Long fromUser;
 
     private Long toUser;
@@ -15,7 +15,11 @@ public class CommonMsgRequestDTO {
 
     private Integer type;
 
-    private Integer msgType;
-
     private String isMy;
+
+    private String time;
+
+    private Long id;
+
+    private String avatar;
 }

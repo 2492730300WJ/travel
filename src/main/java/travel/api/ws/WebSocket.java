@@ -40,13 +40,18 @@ public class WebSocket {
     @Resource
     UserMapper userMapper;
 
+    @Resource
+    PrivateMsgMapper privateMsgMapper;
+
     private static WebSocket webSocket;
+
 
     @PostConstruct
     public void init() {
         webSocket = this;
         // 初使化时将已静态化的configParam实例化
         webSocket.userMapper = this.userMapper;
+        webSocket.privateMsgMapper = this.privateMsgMapper;
     }
 
     /**
@@ -87,27 +92,30 @@ public class WebSocket {
         log.info("[WebSocket] 收到消息：{}", message);
         // 私聊
         if (1 == dto.getMsgType()) {
+            PrivateMsg privateMsg = new PrivateMsg();
+            privateMsg.setFromUser(dto.getFromUser());
+            privateMsg.setToUser(dto.getToUser());
+            privateMsg.setMessage(dto.getMessage());
+            privateMsg.setType(dto.getType());
+            privateMsg.setIsDelete("N");
+            privateMsg.setIsRead("N");
+            privateMsg.setIsOld("N");
+            privateMsg.setTime(TimeUtil.getNormalTime());
+            webSocket.privateMsgMapper.insert(privateMsg);
             JSONObject fromMsg = JSONObject.parseObject(message);
             JSONObject toMsg = JSONObject.parseObject(message);
-            UserInfoResponseDTO from = webSocket.userMapper.userInfo(dto.getFrom());
+            UserInfoResponseDTO from = webSocket.userMapper.userInfo(dto.getFromUser());
             toMsg.put("isMy", "N");
             toMsg.put("avatar", from.getAvatar());
-            toMsg.put("time", TimeUtil.getNormalTime());
-            AppointSending(dto.getTo().toString(), toMsg.toJSONString());
+            toMsg.put("time", privateMsg.getTime());
+            toMsg.put("id",privateMsg.getId());
+            AppointSending(dto.getToUser().toString(), toMsg.toJSONString());
             fromMsg.put("isMy", "Y");
             fromMsg.put("avatar", from.getAvatar());
-            fromMsg.put("time", TimeUtil.getNormalTime());
-            AppointSending(dto.getFrom().toString(), fromMsg.toJSONString());
+            fromMsg.put("id",privateMsg.getId());
+            fromMsg.put("time", privateMsg.getTime());
+            AppointSending(dto.getFromUser().toString(), fromMsg.toJSONString());
 
-//            PrivateMsg privateMsg = new PrivateMsg();
-//            privateMsg.setFromUser(dto.getFrom());
-//            privateMsg.setToUser(dto.getTo());
-//            privateMsg.setMessage(dto.getMessage());
-//            privateMsg.setType(dto.getType());
-//            privateMsg.setIsDelete("N");
-//            privateMsg.setIsRead("N");
-//            privateMsg.setIsOld("N");
-//            privateMsgMapper.insert(privateMsg);
         }
         // 群聊
         if (2 == dto.getMsgType()) {
