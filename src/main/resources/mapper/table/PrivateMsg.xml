@@ -7,7 +7,7 @@
             if(pm.from_user = #{fromUser} , 'Y' , 'N') isMy,
             from_user fromUser,
             to_user toUser,
-            id,
+            concat('msg',id) id,
             time,
             type,
             message,
